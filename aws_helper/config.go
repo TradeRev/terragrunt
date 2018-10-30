@@ -93,6 +93,7 @@ func AssumeIamRole(iamRoleArn string) (*sts.Credentials, error) {
 	input := sts.AssumeRoleInput{
 		RoleArn:         aws.String(iamRoleArn),
 		RoleSessionName: aws.String(fmt.Sprintf("terragrunt-%d", time.Now().UTC().UnixNano())),
+		DurationSeconds: aws.Int(14400),
 	}
 
 	output, err := stsClient.AssumeRole(&input)
